@@ -16,7 +16,7 @@ $coord = $coord + ($part_s / 100) / 3600;
 //echo $coord;
 */
 
-$file = file_get_contents('./coord.txt', true);
+$file = file_get_contents('./src/coord.txt', true);
 $out = '';
 $array = explode("\n", $file);
 foreach($array as $ar)
@@ -55,4 +55,4 @@ foreach($array as $ar)
 	</Placemark>";
     }
 }
-file_put_contents('./out_placemark.txt', $out);
+file_put_contents('./src/out_placemark.txt', $out);
