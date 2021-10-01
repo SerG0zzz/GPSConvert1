@@ -4,14 +4,11 @@
   },
   "autoload": {
     "psr-4": {
-      "Lesson\\GpsConverter\\": "public"
+      "Lesson\\GpsConverter\\": "src"
     }
   },
   "require": {
-    "php": ">=7.1",
+    "php": ">=7.4",
     "roave/security-advisories": "dev-master"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "^9.5"
   }
 }
