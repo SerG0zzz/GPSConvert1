@@ -1,6 +1,6 @@
 <?php
 
-$str = "55°27'37,41";
+/*$str = "55°27'37,41";
 
 $degree = (integer)substr($str, 0, 2);
 $minute = (integer)substr($str, 4, 2);
@@ -12,6 +12,7 @@ $coord = $degree + $minute / 60;
 $coord = $coord + $second / 3600;
 $coord = $coord + ($part_s / 100) / 3600;
 //echo $coord;
+*/
 
 $file = file_get_contents('./coord.txt', true);
 $out = '';
