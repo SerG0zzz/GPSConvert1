@@ -1,5 +1,7 @@
 <?php
 
+namespace Lesson\GpsConverter;
+
 /*$str = "55°27'37,41";
 
 $degree = (integer)substr($str, 0, 2);
