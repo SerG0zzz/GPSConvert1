@@ -29,4 +29,10 @@ final class Location
     {
         return $this->bores;
     }
+
+    public function addBore(Bore $bore): self
+    {
+        $this->bores[] = $bore;
+        return $this;
+    }
 }
