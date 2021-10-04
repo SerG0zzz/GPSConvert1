@@ -1,13 +1,13 @@
 #!/usr/bin/env php
 <?php
 
-use Lesson\GpsConverter\Provider\LocationFakeProvider;
+use Lesson\GpsConverter\Provider\LocationTxtProvider;
 
 require_once 'vendor/autoload.php';
 
-$provider = new LocationFakeProvider();
+$provider = new LocationTxtProvider();
 
-var_dump($provider->getLocations());
+var_dump($provider->setBores());
 exit;
 /*$str = "55°27'37,41";
 
