@@ -7,10 +7,11 @@ use Lesson\GpsConverter\Entity\Location;
 
 class LocationTxtProvider
 {
-    public function setBores(): array
+    public function setBores()
     {
         $array = explode("\n", file_get_contents('./src/data/coord.txt', true));
-        $loc = [];
+        $ret = [];
+        $bores = [];
         foreach($array as $ar) {
             if (strpos($ar, '°') !== false) {
                 $pos = strpos($ar, "\t", 0);
@@ -36,13 +37,17 @@ class LocationTxtProvider
                 $coord2 = $degree2 + $minute2 / 60;
                 $coord2 += $second2 / 3600;
                 $coord2 += ($part_s2 / 100) / 3600;
-                $bores += new Bore($name, $coord1, $coord2);
+                $bores[] = new Bore($name, $coord1, $coord2);
             } else {
                 if (strlen($ar) !== 0) {
-                     $loc += new Location($ar, $bores);
+                    $loc = $ar;
+                } else {
+                    //$ret = new Location($loc, $bores);
+                    var_dump($bores);
+                    $bores = [];
                 }
             }
         }
-        return $loc;
+        return $ret;
     }
 }
