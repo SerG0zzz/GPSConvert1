@@ -7,7 +7,7 @@ require_once 'vendor/autoload.php';
 
 $provider = new LocationTxtProvider();
 
-var_dump($provider->setBores());
+var_dump($provider->getBores());
 exit;
 /*$str = "55°27'37,41";
 

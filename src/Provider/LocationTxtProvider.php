@@ -7,49 +7,44 @@ use Lesson\GpsConverter\Entity\Location;
 
 class LocationTxtProvider
 {
-    public function setBores()
+    public function getBores(): array
     {
         $array = explode("\n", file_get_contents('./src/data/coord.txt', true));
-        $ret = [];
-        $bores = [];
-        foreach($array as $ar) {
-            if (strpos($ar, '°') !== false) {
-                $pos = strpos($ar, "\t", 0);
-                $name = (integer)substr($ar, 0, $pos);
-                $degree1 = (integer)substr($ar, $pos, 4);
+        $locations = [];
+        $location  = [];
+        foreach($array as $line) {
+            if (strpos($line, '°') !== false) {
+                $pos = strpos($line, "\t", 0);
+                $name = (integer)substr($line, 0, $pos);
+                $degree = (integer)substr($line, $pos, 4);
                 $pos += 5;
-                $minute1 = (integer)substr($ar, $pos, 4);
+                $minute = (integer)substr($line, $pos, 4);
                 $pos += 3;
-                $second1 = (integer)substr($ar, $pos, 4);
+                $second = (integer)substr($line, $pos, 4);
                 $pos += 3;
-                $part_s1 = (integer)substr($ar, $pos, 4);
+                $part_s = (integer)substr($line, $pos, 4);
                 $pos += 3;
-                $degree2 = (integer)substr($ar, $pos, 4);
+                $latitude = $degree + $minute / 60;
+                $latitude += $second / 3600;
+                $latitude += ($part_s / 100) / 3600;
+                $degree = (integer)substr($line, $pos, 4);
                 $pos += 5;
-                $minute2 = (integer)substr($ar, $pos, 4);
+                $minute = (integer)substr($line, $pos, 4);
                 $pos += 3;
-                $second2 = (integer)substr($ar, $pos, 4);
+                $second = (integer)substr($line, $pos, 4);
                 $pos += 3;
-                $part_s2 = (integer)substr($ar, $pos, 4);
-                $coord1 = $degree1 + $minute1 / 60;
-                $coord1 += $second1 / 3600;
-                $coord1 += ($part_s1 / 100) / 3600;
-                $coord2 = $degree2 + $minute2 / 60;
-                $coord2 += $second2 / 3600;
-                $coord2 += ($part_s2 / 100) / 3600;
-                //$bores = new Bore($name, $coord1, $coord2);
-                //var_dump($name);
-                $location->addBore(new Bore($name, $coord1, $coord2));
+                $part_s = (integer)substr($line, $pos, 4);
+                $longitude = $degree + $minute / 60;
+                $longitude += $second / 3600;
+                $longitude += ($part_s / 100) / 3600;
+                $location->addBore(new Bore($name, $latitude, $longitude));
             } else {
-                if (strlen($ar) !== 0) {
-                    $loc = $ar;
-                } else {
-                    $location = new Location($loc);
-                    //var_dump($bores);
-                    //$bores = [];
+                if (strlen($line) !== 0) {
+                    if (!empty($location)) $locations[] = $location;
+                    $location = new Location($line);
                 }
             }
         }
-        return $ret;
+        return $locations;
     }
 }
