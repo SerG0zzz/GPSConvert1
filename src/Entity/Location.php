@@ -22,6 +22,8 @@ final class Location
         return $this->name;
     }
 
+    //test
+
     /**
      * @return Bore[]
      */
